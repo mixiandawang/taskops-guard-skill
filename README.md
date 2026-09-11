@@ -134,7 +134,7 @@ node scripts/validate.mjs
 检查项：
 
 1. `skills/taskops-guard-skill/SKILL.md` 存在且含合法 YAML frontmatter
-2. `name` 符合 `^[a-z0-9]+(?:-[a-z0-9]+)*$`（**小写 kebab-case，这是硬性校验**）
+2. `name` 符合正则 `^[a-z0-9]+(?:-[a-z0-9]+)*$`（**小写 kebab-case，这是硬性校验**）
 3. 必填字段 `name` / `description` 非空
 4. 未使用已废弃的 frontmatter 键（如 `modelInvocable`，会直接报错并导致技能被丢弃）
 5. 两份 `SKILL.md` 正文一致（无漂移）
