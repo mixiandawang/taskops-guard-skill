@@ -1,0 +1,20 @@
+# 已知信息池落盘文件（含个人信息，禁止提交）
+taskops-known-info.md
+*.known-info.md
+
+# 常见个人信息 / 材料泄漏面
+*.local.md
+.env
+.env.*
+!.env.example
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node（仅用于 scripts/validate.mjs）
+node_modules/
+npm-debug.log*
