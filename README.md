@@ -17,7 +17,7 @@
 - [自检](#自检)
 - [隐私与安全](#隐私与安全)
 - [限制](#限制)
-- [首次发布](#首次发布维护者自查)
+- [发布你自己的版本](#发布你自己的版本)
 - [License](#license)
 
 ---
@@ -169,27 +169,48 @@ node scripts/validate.mjs
 
 ---
 
-## 首次发布（维护者自查）
+## 发布你自己的版本
 
-发布前依次执行：
+> 本章节面向 **fork 本仓库后二次发布**的使用者。只想使用本技能的话，直接看[三种用法](#三种用法)即可，无需阅读本章。
+
+### 第一步：发布前的两道检查
 
 ```bash
 # 1. 确认没有把个人信息/材料混进仓库（.gitignore 已挡 taskops-known-info.md）
 git status --short
 
-# 2. 自检技能包
+# 2. 自检技能包：frontmatter 合法性 + 两份 SKILL.md 防漂移
 node scripts/validate.mjs
+```
 
-# 3. 建仓并提交
+第 2 条拦的是**静默失败**：技能名带大写、`SKILL.md` 放错层级这类问题，harness 不会报错，只会当作技能不存在——别人装了没反应，还查不出原因。
+
+### 第二步：首次上传（仅在第一次需要，做完就不用再敲）
+
+```bash
 git init
 git add .
-git commit -m "feat: TaskOps_AutoFill_Guard 任务分析规划与安全填报技能"
+git commit -m "feat: 我的任务分析规划与安全填报技能"
 git branch -M main
 git remote add origin <你的仓库地址>
 git push -u origin main
 ```
 
-### Windows 用户建议先做的两项配置
+执行前请在 GitHub 网页端新建一个**空仓库**（不要勾 Add README / .gitignore / License，避免与本地冲突）。
+
+> ⚠️ **`git init` 与 `git remote add origin` 只需执行一次。** 重复运行会提示 `remote origin already exists`。若要同时推送 Gitee 镜像，请给第二个远端换个名字（例如 `gitee`），不要再用 `origin`。
+
+### 第三步：日常更新只需三条
+
+```bash
+git add .
+git commit -m "改了什么"
+git push
+```
+
+首次推送时加了 `-u`，追踪关系已建立，之后不必再写 `origin main`。
+
+### Windows 用户建议的两项全局配置
 
 ```bash
 # 提交身份（必填，否则无法 commit）
@@ -202,6 +223,8 @@ git config --global user.email "你的邮箱或 noreply 地址"
 # 中文路径不再显示成 \344\275\240 这种转义
 git config --global core.quotepath false
 ```
+
+`user.email` 一旦进入提交历史就很难清洗，**建议第一次 push 前就决定好**用真实邮箱还是 noreply 地址。
 
 ### ⚠️ 排查 SSL 校验
 
